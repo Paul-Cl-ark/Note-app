@@ -45,6 +45,10 @@ app.use(session({
   saveUninitialized: true
 }))
 
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // connect flash
 app.use(flash())
 
@@ -53,6 +57,7 @@ app.use(function(req ,res, next) {
   res.locals.success_message = req.flash('success_message')
   res.locals.error_message = req.flash('error_message')
   res.locals.error = req.flash('error')
+  res.locals.user = req.user || null
   next()
 })
 
